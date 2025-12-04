@@ -6,7 +6,10 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='stile.css') }}">
 </head>
 <body>
-    <h1>AfterVar!</h1>
-    <p>Benvenuti nel portale degli arbitri.</p>
+   {%include 'header.html'%}
+   <main>
+        <h1>AfterVar!</h1>
+        <p>Benvenuti nel portale degli arbitri.</p>
+    </main>
 </body>
 </html>
