@@ -1,8 +1,4 @@
-h1 {
-    color: blue;
-    text-align: center;
-    margin-top: 50px;
-}
+
 p{
     color: skyblue;
     text-align: left;
@@ -194,7 +190,7 @@ footer-section h3 {
     max-width: 800px;
     height: 500px;
     margin: 50px auto;
-    border: 2px solid #000;
+    border: 5px solid #000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -202,8 +198,10 @@ footer-section h3 {
 
 
 #imghp {
+    position: relative;
     height: 100%;
     width: 100%;
+    overflow: hidden;
 }
 
 #imghp img {
@@ -228,5 +226,73 @@ footer-section h3 {
     background-color: rgba(0,0,0,0.5);
 }
 
+/*transition for h1 and p in homepage*/
+@keyframes fadeInLeft{
+    from{
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.scritta_img h1{
+    color: white;
+    font-size: 50px;
+    font-family: Copperplate, "Copperplate Gothic Light";
+    animation: fadeInLeft 2.6s ease-out forwards;
+    text-align: center;
+    margin-top: 50px;
+}
 
 
+.scritta_img p{
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    font-family:'Times New Roman', Times, serif;
+    opacity: 0;
+    animation: fadeInLeft 2.6s ease-out forwards;
+    animation-delay: 0.5s;
+    text-align: center;
+}
+
+.first_section{
+    display: flex;
+    width: 100%;
+    min-height: 400px;
+    padding: 50px 0;
+}
+
+#first_s_left{
+    /*50% of total space in div*/
+    flex:1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.img_1s{
+    width: 200px;
+    height: 200px;
+    border-radius:50%;
+    margin-left: -40px;
+    margin-top: -20px;
+    border:2px solid #000;
+    overflow: hidden;
+}
+
+.img_circle{
+    width: 100%;
+    height: 100%;
+}
+
+#first_s_right{
+    flex:1;
+    display: flex;
+    justify-content: center;
+    padding-left: 20px;
+}
+    
