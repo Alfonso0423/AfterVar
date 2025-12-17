@@ -12,7 +12,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///aftervar.db'
 
 #init db
 db = SQLAlchemy(app)
-LoginManager=LoginManager()
+login_Manager=LoginManager()
 LoginManager.init_app(app)
 
 #user table, usermixin -> function for info of user session, db.model -> to create table
@@ -24,8 +24,8 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
     email = db.Column(db.String(50), unique=True, nullable=False)
-    password_hash = db.Column(db.String(50), nullable=False)
-    punteggio = db.Column(db.Integer(50))
+    password_hash = db.Column(db.String(256), nullable=False)
+    punteggio = db.Column(db.Integer)
     squad_prefer = db.Column(db.String(50), nullable=False)
     data_iscr = db.Column(db.DateTime, default=datetime.now)
 
@@ -83,13 +83,7 @@ def Registrazione():
 def Logout():
     #user exit
     logout_user()
-    return  (url_for('HomePage'))
-
-
-
-
-
-
+    return redirect(url_for('HomePage'))
 
 #MENU IN FOOTER
 @app.route('/aboutus')
