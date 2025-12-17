@@ -98,5 +98,5 @@ def About_Us():
 
 if __name__ == '__main__':
     db.create_all() #create db if not exist
-    app.run
+    app.run(host='0.0.0.0', port=5000) # host ->to open app to all devices with same network
 

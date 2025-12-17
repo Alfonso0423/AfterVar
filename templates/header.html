@@ -19,7 +19,24 @@
         </div>
 
         <div id="profile">
-            <img src="{{ url_for('static', filename='images/immagine_profilo.jpg') }}" alt="logo_img" id="logo_img">
+            {% if current_user.is_authenticated %}
+            <div id="logo_profile" onclick="ProfileMenu()">   
+                <img src="{{ url_for('static', filename='images/immagine_profilo.jpg') }}" alt="logo_img" id="logo_img">
+            </div>
+
+            <div id="dropdown_profile">
+
+            </div>
+
+
+
+            
+            
+            {% else %}
+            
+            
+            {% endif %}
+
         </div>
         
     </div>
