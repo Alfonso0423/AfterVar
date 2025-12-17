@@ -12,8 +12,13 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///aftervar.db'
 
 #init db
 db = SQLAlchemy(app)
-login_Manager=LoginManager()
-LoginManager.init_app(app)
+login_manager=LoginManager()
+login_manager.init_app(app)
+
+#to translate the UID -> user
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 #user table, usermixin -> function for info of user session, db.model -> to create table
 class User(UserMixin, db.Model):
@@ -91,4 +96,7 @@ def Logout():
 def About_Us():
     return render_template('aboutus.html')
 
+if __name__ == '__main__':
+    db.create_all() #create db if not exist
+    app.run
 
