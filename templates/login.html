@@ -13,24 +13,23 @@
 
 <main class="login_container">
     <div class="login">
-        <h1>Bentornato</h1>
+        <h1 id="h1_login">Bentornato</h1>
             <p id="p_login">Entra in sala VAR</p>
-            
-        <form action="{{ url_for ('Login') }}" method="post">
-            <div class="login_field">
-                
-                    <label for="username">Username: </label>
-                    <input type="text" id="username" name="username">
-            </div>
+    
+        <div class="form">
+            <form action="{{ url_for ('Login') }}" method="post">
+                <div class="login_field">
+                        <label for="username">Username: </label>
+                        <input type="text" id="username" name="username">
+                </div>
 
-            <div class="login_field">
-                <label for="password">Password: </label>
-                <input type="text" id="pwd" name="pwd">
-
-            </div>
-            <button type="submit">Entriamo in campo!</button>
-        </form>
-
+                <div class="login_field">
+                    <label for="password">Password: </label>
+                    <input type="text" id="pwd" name="pwd">
+                </div>
+                <button type="submit">Entriamo in campo!</button>
+            </form>
+        </div>
     </div>
 </main>
 </body>
