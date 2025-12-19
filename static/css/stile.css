@@ -194,6 +194,24 @@ p{
     text-align: center;
 }
 
+.already_login{
+    text-align: center;
+}
+
+.body_register{
+    margin: 0;
+    padding: 0;
+    min-height: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register{
+    
+}
+
 html, body {
     margin: 0;
     padding: 0;
