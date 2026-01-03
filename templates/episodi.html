@@ -11,7 +11,7 @@
 
     <!--section js, like_dislike, comment for no repeat-->
     {% macro interaction(id_video) %}
-    <div class="interactive_sec">
+    <div class="interactive_sec" data-id="{{ id_video }}">
         <div class="like_dislike_sec">
             <button class="btn_like_dislike btn_green" onclick="LikeOrNot(this, 'like')">
                 &#128077; </button>
@@ -31,6 +31,7 @@
             <div class="comment_sec">
                 <input type="text" class="comment_box" placeholder="Scrivi il tuo parere..">
                 <button class="btn_comment" onclick="InviaCommento(this)">Invia</button>
+                <a href="{{ url_for('VisualizzaCommenti', video_id=id_video) }} ">Leggi Tutti i Commenti</a>
             </div>
         </div>
     </div>

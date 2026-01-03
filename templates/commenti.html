@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+</head>
+<body>
+     {% include 'header.html' %}
+
+     <main class="comment_cnt">
+
+        <div class="comment_head">
+            <h1>Commenti: {{ titolo }}</h1>
+            <a href="{{ url_for('Episodi') }}" class="btn_back">Episodi</a>
+        </div>
+
+        <div class="comment_list">
+            {% if commenti %}
+                {% for c in commenti %}
+                <div class="comment_header_sec">
+                    <span class="comment_user">{{c.stampa_user}}</span>
+                </div> 
+                    <div class="comment_body">
+                        <p>{{ c.testo }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="no_comment">
+                    <p>Non ci sono commenti in questa partita</p>
+                </div>
+            {% endif %}
+        </div>
+
+     </main>
+    
+     {% include 'footer.html' %}
+
+</body> 
+</html>
