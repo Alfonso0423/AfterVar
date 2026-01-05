@@ -29,47 +29,47 @@ def contiene_parolacce(testo):
             return True
     return False
 
-# number id_video, surname ref and boolean for big mistake (true=big mistake)
+# number id_video as str, surname ref and boolean for big mistake (true=big mistake)
 VIDEO = {
-    1: ("Marinelli", False),
-    2: ("Marcenaro", False),
-    3: ("Tremolada", True),
-    4: ("Collu", False),
-    5: ("Rapuano", True),
-    6: ("Crezzini", False),
-    7: ("Di Bello", False),
-    8: ("Manganiello", False), 
-    9: ("Perenzoni", False), 
-    10: ("Guida", False),
-    11: ("Piccinini", False),
-    12: ("Fourneau", False),
-    13: ("Marinelli", True),
-    14: ("Guida", False),
-    15: ("Marcenaro", False),
-    16: ("Mariani", False),
-    17: ("Colombo", False),
-    18: ("La Penna", False),
-    19: ("Sozza", True),
-    20: ("Crezzini", False),
-    21: ("Doveri", True),
-    22: ("Chiffi", True),
-    23: ("Abisso", False),
-    24: ("Di Bello", True), 
-    25: ("Doveri", True),
-    26: ("Sozza", False),
-    27: ("Bonacina",False),
-    28: ("Collu", True), 
-    29: ("Piccinini", True),
-    30: ("Massa", False),
-    31: ("Zufferli", False),
-    32: ("Mucera", False),
-    33: ("Mariani", False),
-    34: ("Crezzini", True),
-    35: ("Marchetti", False),
-    36: ("Sozza", False),
-    37: ("Fourneau", False),
-    38: ("Pairetto", True),
-    39: ("Calzavara", False)
+    "1": ("Marinelli", True),
+    "2": ("Marcenaro", False),
+    "3": ("Tremolada", True),
+    "4": ("Collu", False),
+    "5": ("Rapuano", True),
+    "6": ("Crezzini", False),
+    "7": ("Di Bello", False),
+    "8": ("Manganiello", False), 
+    "9": ("Perenzoni", False), 
+    "10": ("Guida", False),
+    "11": ("Piccinini", False),
+    "12": ("Fourneau", False),
+    "13": ("Marinelli", True),
+    "14": ("Guida", False),
+    "15": ("Marcenaro", False),
+    "16": ("Mariani", False),
+    "17": ("Colombo", False),
+    "18": ("La Penna", False),
+    "19": ("Sozza", True),
+    "20": ("Crezzini", False),
+    "21": ("Doveri", True),
+    "22": ("Chiffi", True),
+    "23": ("Abisso", False),
+    "24": ("Di Bello", True), 
+    "25": ("Doveri", True),
+    "26": ("Sozza", False),
+    "27": ("Bonacina",False),
+    "28": ("Collu", True), 
+    "29": ("Piccinini", True),
+    "30": ("Massa", False),
+    "31": ("Zufferli", False),
+    "32": ("Mucera", False),
+    "33": ("Mariani", False),
+    "34": ("Crezzini", True),
+    "35": ("Marchetti", False),
+    "36": ("Sozza", False),
+    "37": ("Fourneau", False),
+    "38": ("Pairetto", True),
+    "39": ("Calzavara", False)
 }
 
 #user table, usermixin -> function for info of user session, db.model -> to create table
@@ -154,12 +154,14 @@ def calcola_sanz_arbitro(cognome_arbitro):
             giusto = 0.0
 
             for v in voti:
-                if v.giudizio_votazione is True:
-                    errore += v.peso_voto
-                elif v.giudizio_votazione is False:
-                    giusto += v.peso_voto
+                if v.giudizio_votazione is False:
+                    errore += v.w_voto
+                elif v.giudizio_votazione is True:
+                    giusto += v.w_voto
 
+            print(f"Video {v_id}: Errore={errore} vs Giusto={giusto} -> Grave? {grave}")
             if errore>giusto:
+                print(f"  -> ASSEGNATO CARTELLINO (Grave: {grave})") # DEBUG
                 if grave:
                     rossi+=1
                 else:
@@ -179,22 +181,22 @@ def calcola_sanz_arbitro(cognome_arbitro):
         nuovi_rossi = tot_rossi-storico_rossi
 
         for i in range(nuovi_rossi):
-            arbitro.rossi_consecutivi += 1
+            arbitro.rossi_consec += 1
 
-            if arbitro.rossi_consecutivi == 1:
+            if arbitro.rossi_consec == 1:
                 arbitro.turni_sosp += 1
-            elif arbitro.rossi_consecutivi == 2:
+            elif arbitro.rossi_consec == 2:
                 arbitro.turni_sosp += 3
-            elif arbitro.rossi_consecutivi >= 3:
+            elif arbitro.rossi_consec >= 3:
                 arbitro.turni_sosp += 5
 
-    if arbitro.turni_sosp == 0:
-        arbitro.stato = "Attivo"
-    elif arbitro.gialli == 1:
-        arbitro.stato = "Diffidato"
-    elif arbitro.turni_sosp > 0:
+    if arbitro.turni_sosp > 0:
         arbitro.stato = "Sospeso"
-
+    elif arbitro.c_gialli == 1:
+        arbitro.stato = "Diffidato"
+    else:
+        arbitro.stato = "Attivo"
+    print(f"RISULTATO: Gialli={arbitro.c_gialli}, Rossi={arbitro.c_rossi}, Stato={arbitro.stato}")
     db.session.commit()
 
 #function to populate in default ref and video
