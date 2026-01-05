@@ -40,7 +40,7 @@
 
                             <td class="table_di"> 
                              {% if user.data_iscr %} 
-                                {{user.data_iscr}}
+                                {{user.data_iscr.strftime('%d/%m/%Y')}}
                              {% else %}
                                 - 
                              {% endif %}
